@@ -1,0 +1,104 @@
+.navbar {
+  position: absolute;
+  top: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 500;
+  background-color: transparent;
+  border: none;
+}
+
+.nav-brand a {
+  font-family: var(--font-logo);
+  font-size: 2rem;
+  letter-spacing: 0.05em;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-links a {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  font-weight: 600;
+  position: relative;
+  letter-spacing: 0.1em;
+  transition: color 0.2s;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.icon-btn {
+  transition: color 0.2s;
+}
+
+.button-secondary {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 1.25rem;
+  background: transparent;
+  transition: all 0.15s ease;
+}
+
+/* HOME PAGE STYLES (OVER DARK HERO) */
+.navbar-transparent .nav-brand a,
+.navbar-transparent .nav-links a,
+.navbar-transparent .icon-btn {
+  color: #fff;
+}
+.navbar-transparent .nav-brand a {
+  text-shadow: 0 0 15px rgba(192, 1, 0, 1);
+}
+.navbar-transparent .button-secondary {
+  color: #fff;
+  border: 2px solid #fff;
+}
+.navbar-transparent .button-secondary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #fff;
+}
+
+/* OTHER PAGES (OVER LIGHT BACKGROUND) */
+.navbar-light .nav-brand a {
+  color: var(--accent-red);
+}
+.navbar-light .nav-links a, 
+.navbar-light .icon-btn {
+  color: var(--text-primary);
+}
+.navbar-light .button-secondary {
+  color: var(--accent-red);
+  border: 2px solid var(--accent-red);
+}
+.navbar-light .button-secondary:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #fff;
+}
+
+/* COMMON HOVER STATES USING ACCENT RED */
+.nav-links a:hover, .nav-links a.active, .icon-btn:hover {
+  color: var(--accent-red) !important;
+}
+
+.button-secondary:hover {
+  transform: translate(-3px, -3px);
+  box-shadow: 3px 3px 0 var(--text-primary);
+}

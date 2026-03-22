@@ -1,0 +1,90 @@
+.about-page {
+  background: var(--bg-color);
+  padding: 120px 5%;
+}
+
+.about-header {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-bottom: 2px solid var(--surface-highest);
+  padding-bottom: 4rem;
+}
+
+.text-center { text-align: center; }
+.subtitle {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  margin-top: 2rem;
+}
+
+.about-feature {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  padding: 8rem 0;
+  align-items: center;
+  border-bottom: 2px solid var(--surface-highest);
+}
+
+.feature-content h2 { margin-bottom: 1.5rem; font-size: 4rem; }
+.feature-content p {
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  margin-bottom: 2.5rem;
+  line-height: 1.6;
+  max-width: 500px;
+}
+
+.feature-visual {
+  display: flex;
+  justify-content: center;
+}
+
+.placeholder-phone {
+  width: 320px;
+  height: 600px;
+  background: var(--surface-low);
+  border: 4px solid var(--surface-highest);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-red);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.about-culture {
+  padding: 8rem 0;
+}
+
+.about-culture h2 { margin-bottom: 4rem; }
+
+.culture-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.culture-img {
+  aspect-ratio: 4/5;
+  background: var(--surface-low);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.culture-img:hover {
+  background: var(--surface-highest);
+  transform: scale(1.02);
+}

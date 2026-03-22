@@ -1,0 +1,91 @@
+.submit-page {
+  background: var(--bg-color);
+  padding: 120px 5%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+.submit-content {
+  max-width: 600px;
+  width: 100%;
+}
+
+.submit-subtext {
+  font-family: var(--font-heading);
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
+
+.brutalist-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-family: var(--font-heading);
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+}
+
+.brutalist-form input, .brutalist-form textarea {
+  background: var(--surface-low);
+  border: 2px solid var(--surface-highest);
+  color: var(--text-primary);
+  padding: 1rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  outline: none;
+  border-radius: 0;
+}
+
+.brutalist-form input:focus, .brutalist-form textarea:focus {
+  border-color: var(--accent-red);
+}
+
+.upload-group {
+  margin-top: 1rem;
+}
+
+.upload-box {
+  border: 2px dashed var(--surface-highest);
+  padding: 3rem;
+  text-align: center;
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.upload-box:hover {
+  border-color: var(--accent-red);
+  color: var(--accent-red);
+}
+
+.button-submit {
+  margin-top: 2rem;
+  background: var(--accent-red);
+  color: #410000;
+  padding: 1.5rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  transition: all 0.15s;
+}
+
+.button-submit:hover {
+  background: var(--accent-hover);
+  transform: translate(-3px, -3px);
+  box-shadow: 4px 4px 0 #000;
+}
