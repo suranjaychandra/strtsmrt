@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 
@@ -9,61 +9,129 @@ const PRODUCTS = [
   { id: 4, brand: 'ARCHIVE', name: 'Vintage Washed Denim', price: 95, image: 'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&q=80&w=800' },
 ];
 
-export const Home: React.FC = () => {
-  return (
-    <div className="page-container home-page">
-      <section className="hero-section">
-        <div className="hero-gradient"></div>
-        <div className="hero-content">
-          <h1 className="hero-brand-text">STRTSMRT</h1>
-        </div>
-      </section>
+const ProductCard: React.FC<{ product: any }> = ({ product }) => {
+  const [saved, setSaved] = useState(false);
+  const [selectedSize, setSelectedSize] = useState<string | null>(null);
+  const [cartState, setCartState] = useState<'success' | 'error' | ''>('');
 
-      <div className="ticker-tape">
-        <div className="ticker-track">
-          <span>NO RESTOCKS — JUST HYPE // SYSTEM_UPDATE_LIVE // NEW ARRIVALS // AI_STYLIST ONLINE // </span>
-          <span>NO RESTOCKS — JUST HYPE // SYSTEM_UPDATE_LIVE // NEW ARRIVALS // AI_STYLIST ONLINE // </span>
+  const sizes = ['S', 'M', 'L', 'XL'];
+
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      setCartState('error');
+      setTimeout(() => setCartState(''), 2000);
+      return;
+    }
+    setCartState('success');
+    setTimeout(() => setCartState(''), 2000);
+  };
+
+  return (
+    <div className="product-card">
+      <div className="product-image-container">
+        <img src={product.image} alt={product.name} className="product-image" />
+        <button 
+          className={`save-icon ${saved ? 'saved' : ''}`} 
+          onClick={() => setSaved(!saved)}
+        >
+          {saved ? '❤' : '♡'}
+        </button>
+        <div className="product-overlay">
+          <button 
+            className={`button-add-cart ${cartState}`}
+            onClick={handleAddToCart}
+          >
+            {cartState === 'success' ? 'ADDED TO ARCHIVE' : cartState === 'error' ? 'SELECT SIZE FIRST' : 'ADD TO ARCHIVE'}
+          </button>
+          <div className="product-sizes">
+            {sizes.map(size => (
+              <span 
+                key={size}
+                className={`size-option ${selectedSize === size ? 'selected' : ''}`}
+                onClick={() => setSelectedSize(size)}
+              >
+                {size}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
+      <div className="product-meta">
+        <span className="product-brand">{product.brand}</span>
+        <span className="product-price">${product.price}</span>
+      </div>
+      <p className="product-name">{product.name}</p>
+    </div>
+  );
+};
 
-      <section className="product-grid-section">
-        <div className="section-header">
-          <h2>Latest Drops</h2>
-          <div className="filter-bar">
-            <span>Brands</span>
-            <span>Fits</span>
-            <span>Price</span>
+export const Home: React.FC = () => {
+  const heroRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const hero = heroRef.current;
+      if (!hero) return;
+      const scrollY = window.scrollY;
+      const heroHeight = hero.offsetHeight;
+      const progress = Math.min(scrollY / (heroHeight * 0.6), 1);
+      const blur = progress * 20;
+      const scale = 1 + progress * 0.05;
+      const opacity = 1 - progress * 0.3;
+      hero.style.filter = `blur(${blur}px)`;
+      hero.style.transform = `scale(${scale})`;
+      hero.style.opacity = `${opacity}`;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  return (
+    <div className="page-container home-page">
+      <div className="hero-sticky-wrapper">
+        <section className="hero-section" ref={heroRef}>
+          <div className="hero-content">
+            <div className="hero-logo">
+              <span className="hero-logo-strt">STRT</span>
+              <span className="hero-logo-smrt">SMRT</span>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div className="scroll-over-content">
+        <div className="ticker-tape">
+          <div className="ticker-track">
+            <span>NO RESTOCKS — JUST HYPE // SYSTEM_UPDATE_LIVE // NEW ARRIVALS // AI_STYLIST ONLINE // </span>
+            <span>NO RESTOCKS — JUST HYPE // SYSTEM_UPDATE_LIVE // NEW ARRIVALS // AI_STYLIST ONLINE // </span>
           </div>
         </div>
 
-        <div className="product-grid">
-          {PRODUCTS.map(product => (
-            <div key={product.id} className="product-card">
-              <div className="product-image-container">
-                <img src={product.image} alt={product.name} className="product-image" />
-                <button className="save-icon">♥</button>
-                <div className="product-overlay">
-                  <button className="button-add-cart">ADD TO ARCHIVE</button>
-                  <div className="product-sizes">S / M / L / XL</div>
-                </div>
-              </div>
-              <div className="product-meta">
-                <span className="product-brand">{product.brand}</span>
-                <span className="product-price">${product.price}</span>
-              </div>
-              <p className="product-name">{product.name}</p>
+        <section className="product-grid-section">
+          <div className="section-header">
+            <h2>Latest Drops</h2>
+            <div className="filter-bar">
+              <span>Brands</span>
+              <span>Fits</span>
+              <span>Price</span>
             </div>
-          ))}
-        </div>
-      </section>
+          </div>
 
-      <section className="cta-section">
-        <h2 className="headline-display text-center">JOIN THE ROSTER</h2>
-        <p className="cta-subtext">DROP YOUR ARCHIVE ON THE MONOLITH. BECOME PART OF THE CULTURE.</p>
-        <div className="cta-action">
-          <Link to="/submit" className="button-primary">GET LISTED</Link>
-        </div>
-      </section>
+          <div className="product-grid">
+            {PRODUCTS.map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </section>
+
+        <section className="cta-section">
+          <h2 className="headline-display text-center">JOIN THE ROSTER</h2>
+          <p className="cta-subtext">DROP YOUR ARCHIVE ON THE MONOLITH. BECOME PART OF THE CULTURE.</p>
+          <div className="cta-action">
+            <Link to="/submit" className="button-primary">GET LISTED</Link>
+          </div>
+        </section>
+      </div>
     </div>
   );
 };

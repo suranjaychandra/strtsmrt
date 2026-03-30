@@ -16,8 +16,20 @@
 
 .nav-brand a {
   font-family: var(--font-logo);
-  font-size: 2rem;
-  letter-spacing: 0.05em;
+  font-size: 1.4rem;
+  letter-spacing: 0.02em;
+  display: flex;
+  flex-direction: column;
+  line-height: 0.8;
+  text-transform: uppercase;
+}
+
+.nav-logo-strt {
+  color: #000;
+}
+
+.nav-logo-smrt {
+  color: #db1515;
 }
 
 .nav-links {
@@ -76,9 +88,6 @@
 }
 
 /* OTHER PAGES (OVER LIGHT BACKGROUND) */
-.navbar-light .nav-brand a {
-  color: var(--accent-red);
-}
 .navbar-light .nav-links a, 
 .navbar-light .icon-btn {
   color: var(--text-primary);

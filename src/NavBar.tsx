@@ -6,12 +6,15 @@ import './NavBar.css';
 export const NavBar: React.FC = () => {
   const location = useLocation();
   const isHome = location.pathname === '/home' || location.pathname === '/';
-  const navClass = isHome ? 'navbar-transparent' : 'navbar-light';
+  const navClass = 'navbar-light';
 
   return (
     <nav className={`navbar ${navClass}`}>
       <div className="nav-brand">
-        <NavLink to="/home">STRTSMRT</NavLink>
+        <NavLink to="/home">
+          <span className="nav-logo-strt">STRT</span>
+          <span className="nav-logo-smrt">SMRT</span>
+        </NavLink>
       </div>
       
       <div className="nav-links">
